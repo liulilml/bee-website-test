@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mediacrawler:
+    build:
+      context: ./mediacrawler
+      dockerfile: Dockerfile
+    container_name: openclaw-mediacrawler
+    restart: "no"
+    volumes:
+      # 采集数据输出
+      - mediacrawler-data:/app/data
+      # 浏览器数据（Cookie 持久化）
+      - mediacrawler-browser:/app/browser_data
+    environment:
+      - TZ=Asia/Shanghai
+    # 安全限制
+    cap_drop:
+      - ALL
+    cap_add:
+      - SYS_ADMIN  # Chromium 沙箱需要
+    security_opt:
+      - seccomp=unconfined  # Chromium 需要
+    shm_size: '2gb'  # Chrome 共享内存
+    networks:
+      - crawler-net
+
+  agent-reach:
+    build:
+      context: ./agent-reach
+      dockerfile: Dockerfile
+    container_name: openclaw-agent-reach
+    restart: "no"
+    volumes:
+      # 输出目录
+      - agent-reach-output:/app/output
+    environment:
+      - TZ=Asia/Shanghai
+    # 安全限制
+    cap_drop:
+      - ALL
+    networks:
+      - crawler-net
+
+volumes:
+  mediacrawler-data:
+    driver: local
+  mediacrawler-browser:
+    driver: local
+  agent-reach-output:
+    driver: local
+
+networks:
+  crawler-net:
+    driver: bridge

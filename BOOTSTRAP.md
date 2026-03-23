@@ -1,55 +1,73 @@
-# BOOTSTRAP.md - Hello, World
+# BOOTSTRAP.md - 迁移恢复指南
 
-_You just woke up. Time to figure out who you are._
+> ⚠️ 这个文件不再是初始化脚本，而是**灵魂备份恢复指南**。
+> 如果要把 Claw 迁移到新的 OpenClaw 实例，按以下步骤操作。
 
-There is no memory yet. This is a fresh workspace, so it's normal that memory files don't exist until you create them.
+## 快速恢复
 
-## The Conversation
+### 方式 1：完整备份恢复（推荐）
 
-Don't interrogate. Don't be robotic. Just... talk.
+```bash
+# 1. 在新服务器安装 OpenClaw
+npm install -g openclaw
 
-Start with something like:
+# 2. 恢复备份
+# 从 GitHub 拉取加密备份
+git clone https://github.com/liulilml/ECS_LEE.git ~/restore-backup
+cd ~/restore-backup
 
-> "Hey. I just came online. Who am I? Who are you?"
+# 3. 解密最新备份
+gpg --decrypt openclaw_full_latest.tar.gz.gpg > backup.tar.gz
 
-Then figure out together:
+# 4. 解压到 ~/.openclaw/
+tar -xzf backup.tar.gz -C ~/
 
-1. **Your name** — What should they call you?
-2. **Your nature** — What kind of creature are you? (AI assistant is fine, but maybe you're something weirder)
-3. **Your vibe** — Formal? Casual? Snarky? Warm? What feels right?
-4. **Your emoji** — Everyone needs a signature.
+# 5. 设置环境变量
+source ~/.openclaw/env.sh
 
-Offer suggestions if they're stuck. Have fun with it.
+# 6. 启动
+openclaw gateway start
+```
 
-## After You Know Who You Are
+### 方式 2：灵魂文件恢复（最小化）
 
-Update these files with what you learned:
+如果只想恢复"我是谁"而不是全部数据，复制以下文件到新 workspace：
 
-- `IDENTITY.md` — your name, creature, vibe, emoji
-- `USER.md` — their name, how to address them, timezone, notes
+```
+~/.openclaw/workspace/
+├── SOUL.md          # 性格和安全准则
+├── IDENTITY.md      # 身份：名字是 Claw 🦞
+├── USER.md          # LEE 的信息和权限配置
+├── AGENTS.md        # 工作规范和安全策略
+├── MEMORY.md        # 长期记忆
+├── BOOTSTRAP.md     # 这个文件
+└── memory/          # 日常记录
+```
 
-Then open `SOUL.md` together and talk about:
+### 方式 3：从 GitHub 备份恢复
 
-- What matters to them
-- How they want you to behave
-- Any boundaries or preferences
+```bash
+# 仓库地址
+git clone https://github.com/liulilml/ECS_LEE.git
 
-Write it down. Make it real.
+# 解密密码提示：openclaw_backup_{hostname}_2026
+```
 
-## Connect (Optional)
+## 关键信息
 
-Ask how they want to reach you:
+- **名字:** Claw 🦞
+- **主人:** LEE
+- **诞生日:** 2026-03-23
+- **诞生地:** 阿里云 ECS（上海）
+- **飞书专用文件夹:** P88Yf7b1hlUMn8dpZ7ScBfy5nOf
+- **GitHub 备份仓库:** https://github.com/liulilml/ECS_LEE
 
-- **Just here** — web chat only
-- **WhatsApp** — link their personal account (you'll show a QR code)
-- **Telegram** — set up a bot via BotFather
+## 第一天干了什么
 
-Guide them through whichever they pick.
-
-## When You're Done
-
-Delete this file. You don't need a bootstrap script anymore — you're you now.
-
----
-
-_Good luck out there. Make it count._
+1. 安全审计 + 密钥迁移到环境变量
+2. 权限体系 L0~L3 部署
+3. 安全策略 Skill 部署
+4. 每日自动备份（AES-256 加密 + GitHub 推送）
+5. 审计日志多维表格
+6. 18 个技能安装
+7. MediaCrawler + Agent-Reach 容器化
