@@ -32,6 +32,26 @@
     "agent-browser": {
       "version": "0.2.0",
       "installedAt": 1774264380956
+    },
+    "multi-search-engine": {
+      "version": "2.0.1",
+      "installedAt": 1774264981585
+    },
+    "skill-finder-cn": {
+      "version": "1.0.1",
+      "installedAt": 1774265043519
+    },
+    "free-ride": {
+      "version": "1.0.5",
+      "installedAt": 1774265055524
+    },
+    "arxiv-watcher": {
+      "version": "1.0.0",
+      "installedAt": 1774265101768
+    },
+    "multi-source-feed": {
+      "version": "1.0.1",
+      "installedAt": 1774265164186
     }
   }
 }
