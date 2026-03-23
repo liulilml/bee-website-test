@@ -19,3 +19,11 @@ Created /root/openclaw-backups/openclaw_full_20260323_183059.tar.gz
 Archive verification: passed
 [20260323_183059] ✅ 备份成功: /root/openclaw-backups/openclaw_full_20260323_183059.tar.gz (6.8M)
 [20260323_183059] 备份完成，当前保留 1 个备份
+[20260323_184943] ========== 开始备份 ==========
+[20260323_184952] ✅ 备份成功: /root/openclaw-backups/openclaw_full_20260323_184943.tar.gz (7.0M)
+[20260323_184953] 🔐 加密成功: /root/openclaw-backups/openclaw_full_20260323_184943.tar.gz.gpg (7.0M)
+[20260323_184953] 🗑️ 已删除未加密备份文件
+[20260323_184953] 📤 开始推送到 GitHub...
+[20260323_184957] ✅ GitHub 推送成功 (master)
+[20260323_184957] ✅ 备份完成！本地保留 1 个加密备份
+[20260323_184957] ========== 备份结束 ==========
