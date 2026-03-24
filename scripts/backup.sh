@@ -27,17 +27,21 @@ fi
 
 # ===== Step 1: 执行完整备份 =====
 BACKUP_FILE="$BACKUP_DIR/openclaw_full_${TIMESTAMP}.tar.gz"
-OUTPUT=$(openclaw backup create --verify --output "$BACKUP_FILE" 2>&1) || true
 
-if [ ! -f "$BACKUP_FILE" ]; then
-  log "⚠️ 官方备份命令失败，使用手动备份..."
-  cd "$HOME"
-  tar -czf "$BACKUP_FILE" \
-    --exclude='.openclaw/extensions' \
-    --exclude='.openclaw/media' \
-    --exclude='.openclaw/delivery-queue' \
-    .openclaw/ 2>&1 || true
-fi
+# 手动 tar 备份，排除大型外部项目（有独立 Git 仓库，可随时重装）
+# 排除列表见 memory/external-projects.md
+log "📦 开始打包备份（排除大型外部项目）..."
+cd "$HOME"
+tar -czf "$BACKUP_FILE" \
+  --exclude='.openclaw/extensions' \
+  --exclude='.openclaw/media' \
+  --exclude='.openclaw/delivery-queue' \
+  --exclude='.openclaw/workspace/skills/mediacrawler' \
+  --exclude='.openclaw/workspace/skills/agent-reach' \
+  --exclude='*/.venv' \
+  --exclude='*/node_modules' \
+  --exclude='*/__pycache__' \
+  .openclaw/ 2>&1 || true
 
 if [ ! -f "$BACKUP_FILE" ]; then
   log "❌ 备份失败！"
