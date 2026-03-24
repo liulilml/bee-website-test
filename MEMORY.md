@@ -41,18 +41,35 @@
 - 每日凌晨 3:00 系统 crontab 自动备份（加密 + GitHub 推送）
 - 每日早上 9:00 OpenClaw cron 发送备份状态通知
 - 备份保留 7 天，本地 + GitHub 双份
+- 备份已瘦身：排除 .venv/node_modules/__pycache__，344MB → 1.8MB
+- 外部项目重装步骤记录在 memory/external-projects.md
+- 热点选题自动化：每天 9:00 和 18:00 自动拉取热点到选题池
 
 ## 学习背景
 - LEE 正在参加 WaytoAGI 第五期 OpenClaw 训练营
-- 第四课作业已完成：小红书内容生产系统全流程
+- 第四课作业��完成：小红书内容生产系统全流程
 - 第一篇小红书已发布（安全加固踩坑），审核通过
 - 第二篇暂缓（AI自动化内容系统 — 小红书严打AI内容，踩红线）
+- MediaCrawler Cookie 配置、Tavily API、DashScope 图像生成均已配���
 
 ## 开店计划（2026-03-24 提出）
 - LEE 想开线上店，副业，5万以内预算，一个人做，在成都
 - 朋友在做家居小商品（自己设计+找工厂），可能可以合作
-- 两条路线：线上小店卖货 + AI服务卖技能
-- 还在讨论阶段，待进一步确认方向
+- 方向确定：家居收纳类，小红书店铺
+- 模式：一件代发零库存起步
+- 选品方向：磁吸收纳、亚克力透明盒、抽屉分隔板等
+- 下一步：选品→买样品→拍照→小红书内容带货
+
+## 已配置的 API/工具
+- **MediaCrawler**: 小红书 Cookie 登录已配置（Cookie 有时效性，过期需重新获取）
+- **Tavily**: 搜索 API，免费 1000 次/月
+- **DashScope 图像生成**: wanx2.1-t2i-plus 模型效果最好（3D 质感），异步任务模式
+- **图像生成对比**: wanx-v1 < wanx2.1-t2i-turbo < wanx2.1-t2i-plus
+
+## 关键数据表
+- 小红书内容生产库: ArcRbxwmIaXT8usfzmdcIxM3npd
+  - 内容数据表: tblAWECUEIZAS8iS
+  - 选题池: tbl8qhtpBQBZU7w3
 
 ## 关于我自己
 - 名字：Cobalt（钴蓝），LEE 选的。他喜欢蓝色。
