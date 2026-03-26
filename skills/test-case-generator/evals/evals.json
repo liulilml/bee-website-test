@@ -1,0 +1,112 @@
+{
+  "skill_name": "test-case-generator",
+  "evals": [
+    {
+      "id": 1,
+      "name": "完整流程 - 需求文档生成用例",
+      "prompt": "帮我生成测试用例，产品：Bee-Flutter3(#24)，模块：/会员订阅 (#380)，需求文档：https://xxx.feishu.cn/docx/xxx",
+      "expected_output": "读取需求文档→拆分测试点→创建飞书文档→等待用户确认→生成禅道 CSV→上传飞书",
+      "config_required": {
+        "feishu_folder_token": "必须提供",
+        "product_name": "Bee-Flutter3(#24)",
+        "module_name": "/会员订阅 (#380)",
+        "creator": "李茂林"
+      },
+      "assertions": [
+        "阶段一：正确读取需求文档内容",
+        "阶段二：拆分测试点（正向/反向/边界/特殊场景）",
+        "阶段三：创建飞书测试点文档并发送链接",
+        "阶段三：等待用户确认，不自动生成用例",
+        "阶段四：用户确认后展开测试用例",
+        "阶段五：生成禅道 CSV（28 字段 + UTF-8 BOM）",
+        "阶段五：上传 CSV 到飞书云盘",
+        "发送下载链接和统计信息"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "设计稿图片解析",
+      "prompt": "根据这个设计稿生成测试点",
+      "expected_output": "使用 image 工具分析设计稿，提取 UI 元素、交互流程、业务规则，生成测试点",
+      "config_required": {
+        "feishu_folder_token": "必须提供"
+      },
+      "assertions": [
+        "使用 image 工具分析图片",
+        "提取页面元素（按钮、表单、列表等）",
+        "提取交互流程（点击、跳转、弹窗等）",
+        "提取业务规则（输入验证、状态展示等）",
+        "推断异常场景（网络异常、数据为空等）",
+        "生成测试点文档"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "配置首次使用",
+      "prompt": "帮我拆测试点",
+      "expected_output": "检测到 feishu_folder_token 为空，暂停并向用户询问飞书文件夹链接",
+      "config_required": null,
+      "assertions": [
+        "读取 config.json 发现 feishu_folder_token 为空",
+        "暂停测试点生成流程",
+        "向用户询问飞书文件夹链接",
+        "不执行任何需求分析操作"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "交互确认 - 修改测试点",
+      "prompt": "测试点里 TP-003 要改一下，订阅成功应该显示订单号而不是到期时间",
+      "expected_output": "根据用户反馈修改测试点文档，更新飞书文档，确认修改内容",
+      "config_required": {
+        "feishu_folder_token": "必须提供"
+      },
+      "assertions": [
+        "识别用户要修改的测试点编号（TP-003）",
+        "理解修改内容（预期结果：订单号 vs 到期时间）",
+        "使用 feishu_update_doc 更新飞书文档",
+        "回复用户确认修改内容",
+        "等待用户再次确认后才生成用例"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "测试点展开 - 复杂流程",
+      "prompt": "确认了，生成用例吧",
+      "expected_output": "将确认的测试点展开为详细测试用例，复杂流程生成 2-3 个用例（不同路径）",
+      "config_required": {
+        "feishu_folder_token": "必须提供",
+        "product_name": "Bee-Flutter3(#24)",
+        "module_name": "/会员订阅 (#380)"
+      },
+      "assertions": [
+        "正向复杂流程生成 2-3 个用例（不同路径）",
+        "反向/异常每个场景 1 个用例",
+        "边界值每个边界点 1 个用例",
+        "步骤和预期数量一致",
+        "测试数据具体，无占位符",
+        "优先级分配合理（P1-P4）",
+        "CSV 格式符合禅道要求（28 字段、UTF-8 BOM）"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "CSV 格式验证",
+      "prompt": "只要 CSV，不要飞书文档",
+      "expected_output": "跳过飞书文档创建，直接生成禅道 CSV 文件",
+      "config_required": {
+        "product_name": "Bee-Flutter3(#24)",
+        "module_name": "/会员订阅 (#380)"
+      },
+      "assertions": [
+        "不创建飞书测试点文档",
+        "直接分析需求生成测试点",
+        "展开测试用例",
+        "生成 CSV 文件（UTF-8 with BOM）",
+        "28 个字段完整",
+        "所有字段用双引号包裹",
+        "步骤和预期使用实际换行符"
+      ]
+    }
+  ]
+}
