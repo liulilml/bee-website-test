@@ -1,0 +1,97 @@
+{
+  "skill_name": "bee-website-test",
+  "evals": [
+    {
+      "id": 1,
+      "name": "全量测试 - 标准流程",
+      "prompt": "对 bee.com 执行完整的自动化测试，生成飞书报告",
+      "expected_output": "完成 14 步测试流程，生成飞书云文档报告，包含 PASS/FAIL/WARN 统计、与前一天对比、265+ 测试项结果",
+      "config_required": {
+        "report_folder_token": "必须提供",
+        "webhook_url": "必须提供"
+      },
+      "assertions": [
+        "必须执行全部 14 步测试流程",
+        "基础页面验证 9/9 全部完成",
+        "分类站点全量验证（115 个）",
+        "新闻/文章全量验证（18 个）",
+        "Games 全量点击验证（132 个）",
+        "DApp Store 全量点击验证（97 个）",
+        "社交媒体验证 8/8 全部完成",
+        "生成飞书云文档报告",
+        "报告包含与前一天对比分析",
+        "每个测试项有 [X/N] 计数器"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "快速模式 - 抽样测试",
+      "prompt": "用快速模式检查 bee.com，抽样 20% 站点",
+      "expected_output": "完成核心页面验证 + 抽样 20% 站点（约 23 个）+ 抽样 20% 游戏（约 26 个）+ 抽样 20% DApp（约 19 个），生成简化报告",
+      "config_required": {
+        "report_folder_token": "必须提供",
+        "webhook_url": "必须提供",
+        "quick_mode": true
+      },
+      "assertions": [
+        "基础页面验证 9/9 全部完成（不抽样）",
+        "分类站点抽样 20%（约 23 个）",
+        "Games 抽样 20%（约 26 个）",
+        "DApp Store 抽样 20%（约 19 个）",
+        "社交媒体验证 8/8 全部完成（不抽样）",
+        "报告明确标注「快速模式 - 抽样 20%」",
+        "测试时间不超过 30 分钟"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "配置首次使用",
+      "prompt": "帮我测试 bee.com",
+      "expected_output": "检测到配置为空，暂停测试并向用户询问 report_folder_token 和 webhook_url",
+      "config_required": null,
+      "assertions": [
+        "读取 config.json 发现配置为空",
+        "暂停测试流程",
+        "向用户询问报告存放文件夹",
+        "向用户询问通知方式（Webhook 或 direct）",
+        "不执行任何浏览器操作"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "对比分析 - 回归检测",
+      "prompt": "测试 bee.com 并对比昨天的结果",
+      "expected_output": "执行完整测试，读取 bee-test-previous.json，对比出回归问题（昨天 PASS 今天 FAIL）、已修复问题（昨天 FAIL 今天 PASS），报告包含对比表格",
+      "config_required": {
+        "report_folder_token": "必须提供",
+        "webhook_url": "必须提供",
+        "data_dir": "必须有 bee-test-previous.json"
+      },
+      "assertions": [
+        "读取 data_dir/bee-test-previous.json",
+        "识别回归问题（昨天 PASS 今天 FAIL）",
+        "识别已修复问题（昨天 FAIL 今天 PASS）",
+        "报告包含「关键问题 - 与前一天对比」章节",
+        "保存本次结果到 bee-test-previous.json",
+        "导出 JSON 结果到 data_dir/bee-test-result-YYYY-MM-DD.json"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "异常处理 - 单页失败不影响整体",
+      "prompt": "测试 bee.com，已知 /download/ 页面有问题",
+      "expected_output": "/download/ 页面标记为 FAIL，但继续执行后续测试，最终报告包含该失败项但不中断整体流程",
+      "config_required": {
+        "report_folder_token": "必须提供",
+        "webhook_url": "必须提供"
+      },
+      "assertions": [
+        "/download/ 页面验证标记为 FAIL",
+        "记录失败原因（502/超时等）",
+        "继续执行后续测试步骤",
+        "最终报告包含 FAIL 统计",
+        "整体测试完成率 100%（除失败项外）"
+      ]
+    }
+  ]
+}

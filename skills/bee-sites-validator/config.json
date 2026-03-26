@@ -1,0 +1,16 @@
+{
+  "report_folder_token": "DoNvfZbSmle1POd0u9nciiOgnpb",
+  "webhook_url": "direct",
+  "data_dir": "/home/admin/.openclaw/workspace/memory",
+  "sites_api_url": "https://www.bee.com/wp-json/wp/v2/sites",
+  "skip_domains": ["t.me"],
+  "last_validation": {
+    "date": "2026-03-19",
+    "batch": 1,
+    "pages": 2,
+    "total": 200,
+    "http_non_200": 0,
+    "problem_sites": 0,
+    "report_doc_id": "UWJbdIV1jognWkxFMtgcJAgTn4J"
+  }
+}
